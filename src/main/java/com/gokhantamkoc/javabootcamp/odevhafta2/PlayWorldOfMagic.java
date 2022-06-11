@@ -38,18 +38,16 @@ public class PlayWorldOfMagic implements CommandLineRunner {
 		}
 	}
 
-	public static int resolveBattle(String[] magicianSpells, 
-									float[] spellDamageInfo, 
-									String[] bossNames,
-									float[] bossHPs) {
+	public static int resolveBattle(String[] magicianSpells, float[] spellDamageInfo, String[] bossNames,
+			float[] bossHPs) {
 
 		int spellsUsed = 0;
 		// ______ BASLANGIC _______ Kodunuz buradan baslamali
 		float mostEffectiveMagicPower = 0;
 		for (int i = 0; i < spellDamageInfo.length; i++) {
 			if (spellDamageInfo[i] > mostEffectiveMagicPower) {
-				mostEffectiveMagicPower = spellDamageInfo[i]; // en etkili büyüyü bulduk. Bu sayede daha az büyü
-																// kullanacağız.
+				mostEffectiveMagicPower = spellDamageInfo[i]; // en etkili büyüyü bulduk. Bu sayede daha az büyü kullanacağız.
+
 			}
 		}
 
@@ -60,16 +58,13 @@ public class PlayWorldOfMagic implements CommandLineRunner {
 			}
 		}
 
-		String mostEffectiveMagicName = magicianSpells[indexOfMostEffectiveMagicPower]; // en etkili büyünün ismini
-																						// bulduk.
+		String mostEffectiveMagicName = magicianSpells[indexOfMostEffectiveMagicPower]; // en etkili büyünün ismini bulduk. Ama büyülerin isimleri üzerinden değil, etkileri üzerinden yapacağımız için büyü ismi gereksiz oluyor biraz.
 
-		int i = 0;
-		while (i < bossHPs.length) {
-
+		for (int i = 0; i < bossHPs.length; i++) {
 			bossHPs[i] -= mostEffectiveMagicPower; // en etkili büyü birinci canavara vuruyor.
 
-			if (bossHPs[i] <= 0) { // canavarın canı sıfır altına inerse canavar öldü ve sonra ki canavara
-									// geçeceğiz.
+			if (bossHPs[i] <= 0) { // canavarın canı sıfır altına inerse canavar öldü ve sonra ki canavara geçeceğiz.
+
 				i++;
 				spellsUsed++;
 				continue;
